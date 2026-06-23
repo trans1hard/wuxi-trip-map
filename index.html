@@ -267,6 +267,7 @@ const DAYS = [
       { name:'蠡湖之光', lat:31.5397, lng:120.2470, type:'spot', time:'18:15', desc:'湖边散步看日落，作为培训后的低强度放松。', detail:'户外天气敏感；若下雨，直接改去万象城吃饭休息。', xhsKeyword:'无锡 蠡湖之光 日落', gmap:'无锡 蠡湖之光' },
       { name:'渔父岛', lat:31.5352, lng:120.2378, type:'spot', time:'19:00', desc:'沿湖短距离散步；累了可随时结束，不必走完整段。', xhsKeyword:'无锡 渔父岛 傍晚', gmap:'无锡 渔父岛' },
       { name:'蠡湖附近晚餐', lat:31.5310, lng:120.2500, type:'food', time:'19:40', desc:'选择附近本地菜或商场餐厅，以不用排队、回酒店方便为准。', budget:'约 ¥70–150/人', detail:'大众点评与小红书的实时店铺信号尚未核验，页面按钮用于你到现场按距离与排队情况挑选。', pay:{alipay:1,wechat:1,card:0.5,cash:1}, dianpingKeyword:'无锡 蠡湖 晚餐 本地菜', xhsKeyword:'无锡 蠡湖 晚餐', gmap:'无锡 蠡湖 美食' },
+      { name:'确认粗茶淡饭特产库存', lat:31.5182, lng:120.2572, type:'food', time:'20:30', desc:'提前确认茶馓子和油赞子是否有货，并预约27日下午自取或配送到酒店。', detail:'推荐26日晚完成确认，避免27日临时跑店。询问是否有密封、防压包装以及保质期；油炸点心不要和重物放在一起。', pay:{alipay:1,wechat:1,cash:1}, dianpingKeyword:'无锡 粗茶淡饭 茶馓子 油赞子', xhsKeyword:'无锡 粗茶淡饭 茶馓子 油赞子', gmap:'无锡 粗茶淡饭 茶馓子 油赞子' },
       { name:'无锡万象城', lat:31.5300, lng:120.2775, type:'food', time:'—', desc:'雨天备选：室内吃饭、补给，随后直接回酒店。', budget:'按需', dianpingKeyword:'无锡万象城 晚餐', gmap:'无锡万象城' }
     ]
   },
@@ -278,7 +279,9 @@ const DAYS = [
       { name:'鼋头渚周边午餐', lat:31.5200, lng:120.2360, type:'food', time:'11:45', desc:'景区或蠡园方向顺路解决午餐，不为名店绕路。', budget:'约 ¥60–120/人', pay:{alipay:1,wechat:1,card:0.5,cash:1}, dianpingKeyword:'无锡 鼋头渚 附近 午餐', xhsKeyword:'无锡 鼋头渚 附近 吃饭', gmap:'无锡 鼋头渚 美食' },
       { name:'蠡园', lat:31.5210, lng:120.2520, type:'spot', time:'13:00', desc:'与酒店同片区，控制在约1.5小时内，作为返程前的第二站。', budget:'门票以官方当天为准', detail:'若鼋头渚玩得久、天气太热或体力下降，蠡园可以直接删掉。开放与停止入园时间请当天核验。', xhsKeyword:'无锡 蠡园 游览路线', gmap:'无锡 蠡园' },
       { name:'山明水秀大酒店', lat:31.5182, lng:120.2572, type:'hotel', time:'14:45', desc:'取行李、稍作整理；最迟15:30离开。', gmap:'无锡 山明水秀大酒店 蠡溪路999号' },
+      { name:'取粗茶淡饭茶馓子＋油赞子', lat:31.5182, lng:120.2572, type:'food', time:'15:00', desc:'领取前一晚确认或预订的特产，检查数量、密封和防压包装。', detail:'茶馓子与油赞子都容易碎，建议单独手提，不要塞入托运行李或压在箱底。若只能到店自取，必须把往返时间算进15:30的离店红线。', budget:'按购买数量', pay:{alipay:1,wechat:1,cash:1}, dianpingKeyword:'无锡 粗茶淡饭 茶馓子 油赞子', xhsKeyword:'无锡 粗茶淡饭 茶馓子 油赞子', gmap:'无锡 粗茶淡饭 茶馓子 油赞子' },
       { name:'无锡东站', lat:31.5984, lng:120.4623, type:'transport', time:'16:30', desc:'计划提前约2小时抵达；18:27乘G28返京。', detail:'务必以12306票面确认出发站。按车次通常为无锡东站，但不要凭车次记忆赶站。', gmap:'无锡东站' }
+      ,{ name:'无锡东站特产店兜底', lat:31.5984, lng:120.4623, type:'food', time:'—', desc:'若前面没买到，可在车站内询问特产店；只作为兜底，不保证有粗茶淡饭品牌或指定口味。', detail:'到站后先过安检、确认检票口，再购物，至少在开车前30分钟结束购买。', dianpingKeyword:'无锡东站 特产 茶馓子 油赞子', gmap:'无锡东站' }
     ]
   }
 ];
@@ -299,7 +302,7 @@ function overviewContent() {
 <div class="section-head">行程概览</div>
 <div class="day-list">${DAYS.slice(1).map(d=>`<div class="card" onclick="go(${d.id})"><div class="name"><span class="dot" style="background:${d.color}"></span>${d.label} · ${d.title}</div><div class="desc">${d.date}</div></div>`).join('')}</div>
 <div class="section-head">执行提醒</div>
-<div class="pay-summary"><h4>这是一张参考地图，不是打卡任务表</h4>培训结束时间、天气、体力和现场排队都可以覆盖原计划。6月27日的硬约束只有一个：最迟15:30从酒店带行李出发。</div>
+<div class="pay-summary"><h4>这是一张参考地图，不是打卡任务表</h4>培训结束时间、天气、体力和现场排队都可以覆盖原计划。6月27日的硬约束：取好茶馓子和油赞子，并最迟15:30从酒店带行李出发。</div>
 <div class="pay-summary"><h4>出发前再核验</h4><span class="warn">鼋头渚与蠡园开放时间、游船、门票政策，以及G28的实际出发站。</span> 当前无法实时访问官方页面，因此没有把未经确认的信息写成硬承诺。</div>
 <div class="pay-summary"><h4>餐饮选择</h4><span class="ok-text">支付宝、微信和现金通常最稳。</span>具体餐厅不为名气绕路；点击卡片内的大众点评或小红书按钮，按当前位置、近期评价和排队情况临场选。</div>
 <div class="section-head">图例</div>
